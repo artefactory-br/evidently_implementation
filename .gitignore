@@ -128,6 +128,10 @@ ENV/
 env.bak/
 venv.bak/
 
+data/raw/*
+/data
+/raw
+
 # Spyder project settings
 .spyderproject
 .spyproject
