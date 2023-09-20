@@ -42,7 +42,7 @@ def load_reference_current_data(path_reference: str, path_current: str) -> dict:
     dataset_dict = {}
     for name, path in zip(["reference", "current"], [path_reference, path_current]):
         dataset = pd.read_csv(
-            f"data/processed/{path}.csv"
+            f"/Workspace/Repos/clarissa.chevalier@artefact.com/evidently_implementation/data/processed/{path}.csv"
         )
 
         dataset_sample = dataset.sample(n=5000, replace=False)
@@ -69,8 +69,10 @@ def return_data_quality_metrics(dataset_dict: dict) -> None:
         reference_data=dataset_dict["reference"], current_data=dataset_dict["current"]
     )
     data_quality_test_suite.save_json(
-        "data/output/data_quality.json"
+        "/Workspace/Repos/clarissa.chevalier@artefact.com/evidently_implementation/data/output/data_quality.json"
     )
+
+    return data_quality_test_suite
 
 
 def return_data_drift_metrics(dataset_dict: dict) -> None:
@@ -85,8 +87,10 @@ def return_data_drift_metrics(dataset_dict: dict) -> None:
         reference_data=dataset_dict["reference"], current_data=dataset_dict["current"]
     )
     report.save_json(
-        "data/output/data_drift.json"
+        "/Workspace/Repos/clarissa.chevalier@artefact.com/evidently_implementation/data/output/data_drift.json"
     )
+
+    return report
 
 
 def return_target_drift_metrics(dataset_dict: dict) -> None:
@@ -103,11 +107,14 @@ def return_target_drift_metrics(dataset_dict: dict) -> None:
     )
 
     num_target_drift_report.run(
-        reference_data=dataset_dict["reference"], current_data=dataset_dict["current"]
+        reference_data=dataset_dict["reference"], 
+        current_data=dataset_dict["current"]
     )
     num_target_drift_report.save_json(
         "data/output/target_drift.json"
     )
+
+    return num_target_drift_report
 
 
 def create_all_presets_metrics():
